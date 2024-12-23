@@ -10,6 +10,7 @@ import { NavBarService } from 'src/app/services/nav-bar/nav-bar.service';
 export class SideNavigationComponent implements OnInit, OnDestroy{
   selectedIndex!: number;
   navItems!:any[];
+  isNavigationVisible!: boolean;
 
 
   constructor(private navigationService: NavBarService, private router:Router) {}
