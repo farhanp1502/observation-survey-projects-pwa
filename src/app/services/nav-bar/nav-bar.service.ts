@@ -10,17 +10,21 @@ export class NavBarService {
   private selectedIndexSubject = new BehaviorSubject<number>(0);
   selectedIndex$ = this.selectedIndexSubject.asObservable();
 
+  private isNavigationVisibleSubject = new BehaviorSubject<boolean>(true);
+  isNavigationVisible$ = this.isNavigationVisibleSubject.asObservable();
+
   private routerSubscription!: Subscription;
-  navItems:any[] = NavConfig;
+  navItems: any[] = NavConfig;
 
   constructor(private router: Router) {}
 
   initialize() {
     this.updateSelectedIndex(this.router.url);
 
-    this.routerSubscription = this.router.events.subscribe(event => {
+    this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.updateSelectedIndex(event.url);
+        this.updateNavigationVisibility(event.url);
       }
     });
   }
@@ -30,8 +34,24 @@ export class NavBarService {
     this.selectedIndexSubject.next(index === -1 ? 0 : index);
   }
 
+  private updateNavigationVisibility(url: string): void {
+    const matchedNavItem = this.navItems.find((item) => item.route === url);
+    const shouldShowNav = matchedNavItem?.keepNavBar ?? false;
+    this.isNavigationVisibleSubject.next(shouldShowNav);
+  }
+
   setSelectedIndex(index: number): void {
     this.selectedIndexSubject.next(index);
+  }
+
+  hideNavigation(): void {
+    console.log("hide");
+    this.isNavigationVisibleSubject.next(false);
+  }
+
+  showNavigation(): void {
+    console.log("show");
+    this.isNavigationVisibleSubject.next(true);
   }
 
   ngOnDestroy(): void {

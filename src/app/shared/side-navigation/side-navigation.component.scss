@@ -14,12 +14,37 @@
   .side-nav-header {
     text-align: center;
     margin-bottom: 2rem;
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
 
-    h1 {
+    .header-container h1 {
+      flex: 1;
+      text-align: center;
+      margin: 0;
       font-size: 1.8rem;
       color: var(--primary-color);
       font-weight: bold;
     }
+
+    .back-icon {
+      display: flex;
+      justify-content: flex-end;
+      background-color: rgba(138, 56, 245, 0.1);
+      border-radius: 10px;
+      padding: 7px 0px 7px 10px;
+      margin: 2px;
+      mat-icon{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--primary-color);
+      }
+    }
+
   }
 
   .side-nav-list {

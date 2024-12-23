@@ -2,7 +2,15 @@
   <ion-toolbar class="header-container">
     <div class="header-content">
       <div class="header-left">
-       <div class="left-container">
+        <div class="left-container">
+          <div *appResponsive="'desktop'">
+            @if (menuVisible) {
+              <div class="menu-icon" (click)="openMenu()">
+                <mat-icon>menu</mat-icon>
+              </div>
+            }
+          </div>
+
         <ng-content select="[header-left-content]"></ng-content>
         @if(config?.showBackButton){
           <ion-buttons slot="start">

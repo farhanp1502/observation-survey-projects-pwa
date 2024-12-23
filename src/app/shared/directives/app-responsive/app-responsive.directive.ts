@@ -1,4 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, HostListener } from '@angular/core';
+import { NavBarService } from 'src/app/services/nav-bar/nav-bar.service';
 
 @Directive({
   selector: '[appResponsive]',
@@ -8,7 +9,7 @@ export class ResponsiveDirective {
 
   @Input('appResponsive') mode!: 'mobile' | 'desktop';
 
-  constructor(private tpl: TemplateRef<any>, private vcr: ViewContainerRef) {}
+  constructor(private tpl: TemplateRef<any>, private vcr: ViewContainerRef,private navBarService:NavBarService) {}
 
   ngOnInit(): void {
     this.updateView();
@@ -17,6 +18,9 @@ export class ResponsiveDirective {
   @HostListener('window:resize')
   onResize(): void {
     this.updateView();
+    if (this.currentMode === 'mobile') {
+      this.navBarService.showNavigation();
+    }
   }
 
   private updateView(): void {

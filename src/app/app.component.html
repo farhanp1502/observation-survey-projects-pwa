@@ -13,10 +13,10 @@
   <ng-container *appResponsive="'desktop'">
     <div class="desktop-layout">
       @if(isNavigationVisible$ | async){
-        <app-side-navigation class="side-nav"></app-side-navigation>
+        <app-side-navigation @sideNavAnimation class="side-nav"
+        ></app-side-navigation>
       }
-      <hr>
-      <div class="content-area">
+      <div class="content-area" [class.full-width]="(isNavigationVisible$ | async) === false">
         <ion-content>
           <ion-router-outlet></ion-router-outlet>
         </ion-content>

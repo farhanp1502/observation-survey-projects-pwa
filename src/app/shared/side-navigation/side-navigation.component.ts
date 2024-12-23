@@ -18,6 +18,11 @@ export class SideNavigationComponent implements OnInit, OnDestroy{
     this.navigationService.selectedIndex$.subscribe(index => {
       this.selectedIndex = index;
     });
+
+    this.navigationService.isNavigationVisible$.subscribe((visible) => {
+      this.isNavigationVisible = visible;
+    });
+
     this.navigationService.initialize();
     this.navItems = this.navigationService.navItems;
 
@@ -26,6 +31,10 @@ export class SideNavigationComponent implements OnInit, OnDestroy{
   onNavigate(route: string, index: number): void {
     this.navigationService.setSelectedIndex(index);
     this.router.navigate([route]);
+  }
+
+  navHide(): void {
+    this.navigationService.hideNavigation();
   }
 
   ngOnDestroy(): void {

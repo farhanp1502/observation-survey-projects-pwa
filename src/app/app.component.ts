@@ -5,17 +5,39 @@ import { BehaviorSubject } from 'rxjs';
 import { NavItem } from './interfaces/main.interface';
 import  NavConfig  from './config/nav.config.json';
 import { TranslateService } from '@ngx-translate/core';
+import { NavBarService } from './services/nav-bar/nav-bar.service';
+import { trigger, transition, style, animate } from '@angular/animations';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
+  animations: [
+    trigger('sideNavAnimation', [
+      transition(':enter', [
+        style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }),
+        animate('400ms ease-out', style({
+          opacity: 1,
+          transform: 'translateX(0)'
+        }))
+      ]),
+      transition(':leave', [
+        animate('400ms ease-in', style({
+          opacity: 0,
+          transform: 'translateX(-100%)'
+        }))
+      ])
+    ])
+  ]
 })
 export class AppComponent {
-  private _isNavigationVisible = new BehaviorSubject<boolean>(false);
-  isNavigationVisible$ = this._isNavigationVisible.asObservable();
-  navItems: NavItem[] = NavConfig;
+  isNavigationVisible$ = this.navBarService.isNavigationVisible$;
 
-  constructor(private swUpdate: SwUpdate, private router:Router, private translate :TranslateService) {}
+
+  constructor(private swUpdate: SwUpdate, private router:Router, private translate :TranslateService,private navBarService: NavBarService) {}
 
   ngOnInit(){
     if (this.swUpdate.isEnabled) {
@@ -28,19 +50,8 @@ export class AppComponent {
       });
     }
 
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.updateNavigationVisibility(event.urlAfterRedirects);
-      }
-    });
-  }
+    this.navBarService.initialize();
 
-
-  private updateNavigationVisibility(currentRoute: string): void {
-    const matchedNavItem = this.navItems.find((item) => item.route === currentRoute);
-    const shouldShowNav = matchedNavItem?.keepNavBar ?? false;
-
-    this._isNavigationVisible.next(shouldShowNav);
   }
 
 }
