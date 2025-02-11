@@ -4,6 +4,7 @@ interface Environment {
   surveyBaseURL?: string;
   projectsBaseURL?:string;
   capabilities:'all' | 'project' | 'survey';
+  LOGIN_URL?:string
 }
 
 //projects and survey for non-docker
@@ -17,11 +18,12 @@ interface Environment {
 //projects and survey for docker
 export const environment:Environment = {
   production: true,
-  baseURL: window['env' as any]['baseURL' as any] as unknown as string,
-  projectsBaseURL: window['env' as any]['projectsBaseURL' as any] as unknown as string,
-  surveyBaseURL: window['env' as any]['surveyBaseURL' as any] as unknown as string,
-  capabilities:window['env' as any]['capabilities' as any] as unknown as any
-}
+  baseURL: 'https://project-dev.elevate-apis.shikshalokam.org',
+  projectsBaseURL: 'https://project-dev.elevate-apis.shikshalokam.org',
+  surveyBaseURL: 'https://survey-dev.elevate-apis.shikshalokam.org',
+  capabilities: 'all',
+  LOGIN_URL:'http://localhost:3000/',
+  }
 
 //survey-only
 

@@ -19,6 +19,8 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "baseHref": "/mfe_pwa/",
+            "deployUrl": "/mfe_pwa/",
             "assets": [
               {
                 "glob": "**/*",
@@ -32,8 +34,15 @@
               },
               "src/manifest.webmanifest"
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss","node_modules/project-player/styles.css"],
-            "scripts": ["node_modules/project-player/project-player-component.js","node_modules/questionnaire-webcomponent/questionnaire-player-webcomponent.js"],
+            "styles": [
+              "src/global.scss",
+              "src/theme/variables.scss",
+              "node_modules/project-player/styles.css"
+            ],
+            "scripts": [
+              "node_modules/project-player/project-player-component.js",
+              "node_modules/questionnaire-webcomponent/questionnaire-player-webcomponent.js"
+            ],
 
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -129,19 +138,14 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@ionic/angular-toolkit"
-    ]
+    "schematicCollections": ["@ionic/angular-toolkit"]
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
