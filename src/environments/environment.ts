@@ -4,7 +4,9 @@ interface Environment {
   surveyBaseURL?: string;
   projectsBaseURL?:string;
   capabilities:'all' | 'project' | 'survey';
-  LOGIN_URL?:string
+  restrictedPages: any,
+  unauthorizedRedirectUrl:string
+  isAuthBypassed: any
 }
 
 //projects and survey for non-docker
@@ -18,12 +20,14 @@ interface Environment {
 //projects and survey for docker
 export const environment:Environment = {
   production: true,
-  baseURL: 'https://project-dev.elevate-apis.shikshalokam.org',
-  projectsBaseURL: 'https://project-dev.elevate-apis.shikshalokam.org',
-  surveyBaseURL: 'https://survey-dev.elevate-apis.shikshalokam.org',
-  capabilities: 'all',
-  LOGIN_URL:'http://localhost:3000/',
-  }
+  baseURL: window['env' as any]['baseURL' as any] as unknown as string,
+  projectsBaseURL: window['env' as any]['projectsBaseURL' as any] as unknown as string,
+  surveyBaseURL: window['env' as any]['surveyBaseURL' as any] as unknown as string,
+  capabilities:window['env' as any]['capabilities' as any] as unknown as any,
+  restrictedPages: window['env' as any]['restrictedPages' as any],
+  unauthorizedRedirectUrl: window['env' as any]['unauthorizedRedirectUrl' as any] as unknown as string,
+  isAuthBypassed: window['env' as any]['isAuthBypassed' as any] as unknown as any,
+}
 
 //survey-only
 
