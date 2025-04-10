@@ -8,6 +8,7 @@ import { ProgramDetailsPageRoutingModule } from './program-details-routing.modul
 
 import { ProgramDetailsPage } from './program-details.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -16,8 +17,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     IonicModule,
-    ProgramDetailsPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    SharedModule
   ],
   declarations: [ProgramDetailsPage]
 })
