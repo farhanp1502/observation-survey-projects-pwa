@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./project-details.page.scss']
 })
 export class ProjectDetailsPage  implements OnInit {
+  showHeader = environment.showHeader;
   router: Router;
   projectData:any;
   isOnline:any;
@@ -89,9 +90,6 @@ export class ProjectDetailsPage  implements OnInit {
    }
 
 
-    goBack(){
-      this.navCtrl.back();
-    }
 
     getProfileDetails() {
       if(!this.utils.isLoggedIn()){
@@ -111,6 +109,10 @@ export class ProjectDetailsPage  implements OnInit {
 
     ngOnDestroy() {
       window.removeEventListener('message', this.sharePopupHandler);
+    }
+
+    goBack(){
+      this.navCtrl.back();
     }
 
 }
