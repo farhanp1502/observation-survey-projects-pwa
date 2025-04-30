@@ -78,27 +78,27 @@ export class ProjectReportPage implements OnInit {
     this.listType = 'report';
     this.getReportData();
      this.projectsCategories = [
-      {
-        name: 'Total Projects',
-        img: '/assets/images/report-imgs/Note 1.svg',
-        key: 'total',
-      },
-      {
-        name: 'Projects Submitted',
-        img: '/assets/images/report-imgs/note.svg',
-        key: 'submitted',
-      },
-      {
-        name: 'Projects In Progress',
-        img: '/assets/images/report-imgs/Note 4.svg',
-        key: 'inProgress',
-      },
-      {
-        name: 'Projects Started',
-        img: '/assets/images/report-imgs/Note 3.svg',
-        key: 'started',
-      },
-    ];
+       {
+         name: 'Total Projects',
+         img: '/mfe_pwa/assets/images/report-imgs/Note 1.svg',
+         key: 'total',
+       },
+       {
+         name: 'Projects Submitted',
+         img: '/mfe_pwa/assets/images/report-imgs/note.svg',
+         key: 'submitted',
+       },
+       {
+         name: 'Projects In Progress',
+         img: '/mfe_pwa/assets/images/report-imgs/Note 4.svg',
+         key: 'inProgress',
+       },
+       {
+         name: 'Projects Started',
+         img: '/mfe_pwa/assets/images/report-imgs/Note 3.svg',
+         key: 'started',
+       },
+     ];
     setTimeout(() => {
       this.renderChart(this.reportData?.tasks, this.reportData?.categories);
     });
