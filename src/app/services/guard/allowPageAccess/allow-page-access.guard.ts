@@ -20,6 +20,9 @@ export const allowPageAccessGuard: CanActivateFn = (
   const router = inject(Router);
   if (environment.restrictedPages.includes(route.data['pageId'])) {
     console.log('Page access guard', route.data['pageId']);
+    let data = localStorage.getItem('accToken');
+    let data2 = localStorage.getItem('name');
+    console.log('LOCAL DATA: ', data, data2);
     // location.href = environment.unauthorizedRedirectUrl
     return false;
   }
