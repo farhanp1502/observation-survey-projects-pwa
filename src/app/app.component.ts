@@ -7,7 +7,11 @@ import { SwUpdate } from '@angular/service-worker';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private swUpdate: SwUpdate) {}
+  constructor(private swUpdate: SwUpdate) {
+    let data = localStorage.getItem('accToken');
+    let data2 = localStorage.getItem('name');
+    console.log("LOCAL DATA: ", data, data2);
+  }
 
   ngOnInit(){
     if (this.swUpdate.isEnabled) {
