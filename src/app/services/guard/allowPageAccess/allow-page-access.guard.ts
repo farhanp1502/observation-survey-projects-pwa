@@ -19,6 +19,7 @@ export const allowPageAccessGuard: CanActivateFn = (
   | UrlTree => {
   const router = inject(Router);
   if (environment.restrictedPages.includes(route.data['pageId'])) {
+    console.log('Page access guard', route.data['pageId']);
     // location.href = environment.unauthorizedRedirectUrl
     return false;
   }

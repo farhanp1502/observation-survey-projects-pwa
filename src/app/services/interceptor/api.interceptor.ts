@@ -99,6 +99,7 @@ export class ApiInterceptor implements HttpInterceptor {
     if (error?.status === 401) {
       localStorage.clear();
       this.utilService.clearDatabase();
+      console.log('Enterd api interceptor');
       // location.href = environment.unauthorizedRedirectUrl
       return throwError(() => ({
         status: 401,
