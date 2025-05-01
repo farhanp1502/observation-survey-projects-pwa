@@ -10,7 +10,6 @@ export class AppComponent {
   constructor(private swUpdate: SwUpdate) {
     let data = localStorage.getItem('accToken');
     let data2 = localStorage.getItem('name');
-    console.log("LOCAL DATA: ", data, data2);
   }
 
   ngOnInit(){
