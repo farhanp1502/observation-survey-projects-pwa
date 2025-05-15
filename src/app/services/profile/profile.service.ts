@@ -18,8 +18,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ProfileService {
   profilePage = environment.profileRedirectPath || '';
-  profileListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subProject : urlConfig.subSurvey ) + urlConfig['profileListing'].listingUrl;
-  formListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subProject : urlConfig.subSurvey ) + urlConfig['formListing'].listingUrl;
+  profileListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subUser : urlConfig.subSurvey ) + urlConfig['profileListing'].listingUrl;
+  formListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subUser : urlConfig.subSurvey ) + urlConfig['formListing'].listingUrl;
   entityConfigUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subProject : urlConfig.subSurvey ) + urlConfig['profileListing'].entityConfigUrl;
   constructor(
     private apiBaseService: ApiBaseService,
@@ -134,7 +134,7 @@ export class ProfileService {
   async getHomeConfig(listType: any, isReport?: boolean): Promise<any> {
     try {
       const response: any = await firstValueFrom(this.projectsApiService.post(this.formListingUrl, FETCH_HOME_FORM));
-      if (response.status === 200 && response.result) {
+      if (response.result) {
         let data = response.result.data;
         let solutionList = data.find((item: any) => item.type === 'solutionList');
         let returnData:any
