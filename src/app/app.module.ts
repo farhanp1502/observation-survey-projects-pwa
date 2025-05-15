@@ -15,7 +15,7 @@ import { CertificateVerificationPopoverComponent } from './shared/certificate-ve
 import { ShareLinkPopupComponent } from './shared/share-link-popup/share-link-popupcomponent';
 import { ShortUrlPipe } from './shared/pipes/short-url.pipe';
 
-import { 
+import {
   TranslateLoader,
   TranslateModule,
   TranslateService,
@@ -67,12 +67,12 @@ export class AppModule {
   }
   setLanguage() {
     this.translate.setDefaultLang('en');
-    this.translate.use('en'); 
+    this.translate.use('en');
   }
 }
 
 export function configFactory(http: HttpClient): any {
-  return http.get("/mfe_pwa/assets/config/library-config.json").pipe(switchMap((data:any)=>{
+  return http.get("/ml/assets/config/library-config.json").pipe(switchMap((data:any)=>{
     data.baseUrl = environment.baseURL
     return of(data)
   }))
