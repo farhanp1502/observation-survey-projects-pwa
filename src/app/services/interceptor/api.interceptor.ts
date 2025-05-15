@@ -69,9 +69,10 @@ export class ApiInterceptor implements HttpInterceptor {
 
     if (this.isSpecialUrl(req.url)) {
       return req.clone({
-        setHeaders: extraHeaders
-          ? { 'X-auth-token': `bearer ${token}`, ...extraHeaders }
-          : { 'X-auth-token': `bearer ${token}` },
+        setHeaders: {
+          'X-auth-token': `bearer ${token}`,
+          ...(extraHeaders && typeof extraHeaders === 'object' ? extraHeaders : {}),
+        },
       });
     } else if (req.headers.has('skipInterceptor')) {
       return req.clone({
@@ -79,9 +80,10 @@ export class ApiInterceptor implements HttpInterceptor {
       });
     } else {
       return req.clone({
-        setHeaders: extraHeaders
-          ? { 'X-auth-token': token, ...extraHeaders }
-          : { 'X-auth-token': token },
+        setHeaders: {
+          'X-auth-token': token,
+          ...(extraHeaders && typeof extraHeaders === 'object' ? extraHeaders : {}),
+        },
       });
     }
   }
