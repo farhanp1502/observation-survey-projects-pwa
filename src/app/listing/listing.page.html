@@ -28,7 +28,7 @@
     </ion-segment>
   }
 
-  
+
   <ion-grid>
     <ion-row *ngIf="solutionList?.count > 0; else noData">
         @for (solution of solutionList?.data; track solution.id) {
@@ -74,12 +74,12 @@
                     <h6>Expires in {{ solution.daysUntilExpiry }} days</h6>
                   } @else if (solution?.completedDate) {
                     <h6>Completed on {{ solution?.completedDate | date }}</h6>
-                  } 
+                  }
                   @else {
                     <h6>Valid till {{ solution?.endDate | date }}</h6>
                   }
                 }
-              
+
               </div>
 
             </ion-card-content>
@@ -89,7 +89,7 @@
       </ion-row>
       <ng-template #noData>
         <div class="no-data-container ion-margin-top" *ngIf="!showLoading">
-          <img src="/mfe_pwa/assets/images/no_data.jpg" alt="No data">
+          <img src="/ml/assets/images/no_data.jpg" alt="No data">
         </div>
       </ng-template>
   </ion-grid>

@@ -80,22 +80,22 @@ export class ProjectReportPage implements OnInit {
      this.projectsCategories = [
        {
          name: 'Total Projects',
-         img: '/mfe_pwa/assets/images/report-imgs/Note 1.svg',
+         img: '/ml/assets/images/report-imgs/Note 1.svg',
          key: 'total',
        },
        {
          name: 'Projects Submitted',
-         img: '/mfe_pwa/assets/images/report-imgs/note.svg',
+         img: '/ml/assets/images/report-imgs/note.svg',
          key: 'submitted',
        },
        {
          name: 'Projects In Progress',
-         img: '/mfe_pwa/assets/images/report-imgs/Note 4.svg',
+         img: '/ml/assets/images/report-imgs/Note 4.svg',
          key: 'inProgress',
        },
        {
          name: 'Projects Started',
-         img: '/mfe_pwa/assets/images/report-imgs/Note 3.svg',
+         img: '/ml/assets/images/report-imgs/Note 3.svg',
          key: 'started',
        },
      ];
@@ -106,14 +106,14 @@ export class ProjectReportPage implements OnInit {
 
   openProgramModal() {
     this.setProgram(true)
-    this.page = 1; 
-    this.programList= [];  
-    this.getPrograms();  
+    this.page = 1;
+    this.programList= [];
+    this.getPrograms();
   }
 
   selectProgram(item: any) {
     this.isProgramModel=false;
-    this.selectedProgram = item.name;  
+    this.selectedProgram = item.name;
     this.programId = item._id;
     this.getReportData()
   }
@@ -123,10 +123,10 @@ export class ProjectReportPage implements OnInit {
       event.target.disabled = true;
       return;
     }
-    this.page += 1;  
+    this.page += 1;
     await this.getPrograms(event);
   }
-  
+
   async getPrograms(event?: any) {
     this.listType='report';
     this.baseApiService

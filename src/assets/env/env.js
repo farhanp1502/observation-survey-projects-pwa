@@ -5,7 +5,7 @@ window["env"] = {
     surveyBaseURL: 'https://saas-qa.tekdinext.com',
     capabilities: 'all',
     restrictedPages: [],
-    unauthorizedRedirectUrl: "/",
+    unauthorizedRedirectUrl: "/home",
     isAuthBypassed: true,
     profileRedirectPath: "/profile-edit",
     config:{
