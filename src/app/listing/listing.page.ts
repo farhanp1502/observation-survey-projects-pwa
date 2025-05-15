@@ -56,10 +56,8 @@ export class ListingPage implements OnInit {
     console.log('component called')
     this.page = 1;
     this.solutionList = { data: [], count: 0 }
-    debugger;
     this.stateData = await this.profileService.getHomeConfig(this.listType,this.reportPage)
     this.getProfileDetails();
-    debugger;
     this.showLoading = true;
   }
 
@@ -90,19 +88,15 @@ export class ListingPage implements OnInit {
   }
 
   getProfileDetails() {
-    debugger;
     this.profileService.getProfileAndEntityConfigData().subscribe((mappedIds) => {
-      debugger;
       if (mappedIds) {
         this.entityData = mappedIds;
-        debugger;
         this.getListData();
       }
     });
   }
 
   async getListData() {
-    debugger;
     this.showLoading = true;
     await this.loader.showLoading("LOADER_MSG");
     if(this.listType !== 'project'){
