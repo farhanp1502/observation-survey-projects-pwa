@@ -74,7 +74,7 @@ export class ProfileService {
               this.presentAlert();
             }
           }
-          if (entityConfigRes?.status === 200 && profileFormDataRes?.status === 200) {
+          if (entityConfigRes?.status === 200 && profileFormDataRes?.result) {
             const profileData = entityConfigRes?.result?.meta?.profileKeys;
             const profileDetails = profileFormDataRes?.result;
             if (profileDetails?.state) {
