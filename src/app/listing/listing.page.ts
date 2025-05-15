@@ -53,10 +53,13 @@ export class ListingPage implements OnInit {
   }
 
   async ionViewWillEnter() {
+    console.log('component called')
     this.page = 1;
     this.solutionList = { data: [], count: 0 }
+    debugger;
     this.stateData = await this.profileService.getHomeConfig(this.listType,this.reportPage)
     this.getProfileDetails();
+    debugger;
     this.showLoading = true;
   }
 
@@ -68,7 +71,7 @@ export class ListingPage implements OnInit {
     if (!endDate) {
       return '';
     }
-  
+
     const date = new Date(endDate);
     const localTime = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
     return localTime.toDateString();
@@ -87,15 +90,19 @@ export class ListingPage implements OnInit {
   }
 
   getProfileDetails() {
+    debugger;
     this.profileService.getProfileAndEntityConfigData().subscribe((mappedIds) => {
+      debugger;
       if (mappedIds) {
         this.entityData = mappedIds;
+        debugger;
         this.getListData();
       }
     });
   }
 
   async getListData() {
+    debugger;
     this.showLoading = true;
     await this.loader.showLoading("LOADER_MSG");
     if(this.listType !== 'project'){
@@ -150,12 +157,12 @@ export class ListingPage implements OnInit {
       'completed': { tagClass: 'tag-completed', statusLabel: 'Completed' },
       'expired': { tagClass: 'tag-expired', statusLabel: 'Expired' }
     };
-  
+
     const statusInfo = (statusMappings as any)[element.status] || { tagClass: 'tag-not-started', statusLabel: 'Not Started' };
     element.tagClass = statusInfo.tagClass;
     element.statusLabel = statusInfo.statusLabel;
   }
-  
+
   calculateExpiryDetails(element: any) {
     if (element.endDate) {
       element.isExpiringSoon = this.isExpiringSoon(element.endDate);
@@ -169,24 +176,24 @@ export class ListingPage implements OnInit {
   isExpiringSoon(endDate: string | Date): boolean {
     const currentDate = new Date();
     const expiryDate = new Date(endDate);
-  
+
     const diffTime = expiryDate.getTime() - currentDate.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
     return diffDays <= 2 && diffDays > 0;
   }
 
   getDaysUntilExpiry(endDate: string | Date): number {
     const currentDate = new Date();
     const expiryDate = new Date(endDate);
-  
+
     const diffTime = expiryDate.getTime() - currentDate.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
     return Math.max(diffDays, 0);
   }
-  
-  
+
+
 
   loadData() {
     this.page = this.page + 1;
@@ -200,14 +207,14 @@ export class ListingPage implements OnInit {
       case 'project':
         this.router.navigate(['project-details'], { state: { _id:data._id || null, solutionId: data.solutionId} });
         break;
-  
+
       case 'survey':
-        const route = this.reportPage 
-          ? ['report-details', data.submissionId] 
+        const route = this.reportPage
+          ? ['report-details', data.submissionId]
           : ['questionnaire', data.solutionId];
         this.router.navigate(route);
         break;
-  
+
       case 'program':
         this.router.navigate(['program-details' ,data._id ]);
         break;
@@ -216,5 +223,5 @@ export class ListingPage implements OnInit {
         console.warn('Unknown listType:', this.listType);
     }
   }
-  
+
 }

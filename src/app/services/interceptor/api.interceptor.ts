@@ -68,6 +68,7 @@ export class ApiInterceptor implements HttpInterceptor {
     let extraHeaders = JSON.parse(headers);
 
     if (this.isSpecialUrl(req.url)) {
+      console.log(extraHeaders,'extra header')
       return req.clone({
         setHeaders: {
           'X-auth-token': `bearer ${token}`,
@@ -75,10 +76,12 @@ export class ApiInterceptor implements HttpInterceptor {
         },
       });
     } else if (req.headers.has('skipInterceptor')) {
+      console.log(extraHeaders,'extra header')
       return req.clone({
         headers: req.headers.delete('skipInterceptor'),
       });
     } else {
+      console.log(extraHeaders,'extra header')
       return req.clone({
         setHeaders: {
           'X-auth-token': token,
