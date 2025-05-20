@@ -35,15 +35,17 @@
         <ion-col size="12" size-md="6" class="listing-card" (click)="navigateTo(solution)">
           <ion-card class="tiels">
             <ion-card-content>
+              <div class="flex justify-end items-center">
+                @if (solution?.certificate || solution?.certificateTemplateId) {
+                  <span class="certificate-tag">{{"CERTIFICATE"|translate}}</span>
+                }
+              </div>
               <div class="flex justify-between items-center">
                 <h2><b>{{solution?.name}}</b></h2>
                 @if (listType == 'survey' && !stateData?.reportPage) {
                   <span [ngClass]="solution?.tagClass">
                     {{ solution?.statusLabel }}
                   </span>
-                }
-                @if (solution?.certificate || solution?.certificateTemplateId) {
-                  <span class="certificate-tag">{{"CERTIFICATE"|translate}}</span>
                 }
               </div>
               @if(listType == 'program'){
