@@ -10,12 +10,17 @@ import { AlertService } from '../alert/alert.service';
 import { Location } from '@angular/common';
 import { FETCH_HOME_FORM } from '../../core/constants/formConstant';
 import { ProjectsApiService } from '../projects-api/projects-api.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
+  profilePage = environment.profileRedirectPath || '';
+  profileListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subUser : urlConfig.subSurvey ) + urlConfig['profileListing'].listingUrl;
+  formListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subUser : urlConfig.subSurvey ) + urlConfig['formListing'].listingUrl;
+  entityConfigUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subProject : urlConfig.subSurvey ) + urlConfig['profileListing'].entityConfigUrl;
   constructor(
     private apiBaseService: ApiBaseService,
     private loader: LoaderService,
@@ -28,15 +33,15 @@ export class ProfileService {
 
   getFormJsonAndData(): Observable<any> {
     return combineLatest([
-      this.apiBaseService.post(urlConfig['formListing'].listingUrl, FETCH_Profile_FORM).pipe(
+      this.apiBaseService.post(this.formListingUrl, FETCH_Profile_FORM).pipe(
         catchError((err) => {
-          this.toastService.presentToast(err?.error?.message || 'Error loading form JSON', 'danger');
+          this.toastService.presentToast(err?.error?.message || 'FORM_LOAD_ERROR', 'danger');
           return of({ status: 'error', result: {} });
         })
       ),
-      this.apiBaseService.get(urlConfig['profileListing'].listingUrl).pipe(
+      this.apiBaseService.get(this.profileListingUrl).pipe(
         catchError((err) => {
-          this.toastService.presentToast(err?.error?.message || 'Error loading profile data', 'danger');
+          this.toastService.presentToast(err?.error?.message || 'PROFILE_LOAD_ERROR', 'danger');
           return of({ status: 'error', result: {} });
         })
       ),
@@ -45,22 +50,31 @@ export class ProfileService {
 
   getProfileAndEntityConfigData() {
     return combineLatest([
-      this.apiBaseService.get(urlConfig['project'].entityConfigUrl).pipe(
+      this.apiBaseService.get(this.entityConfigUrl).pipe(
         catchError((err) => {
-          this.toastService.presentToast(err?.error?.message || 'Error loading form JSON', 'danger');
+          this.toastService.presentToast(err?.error?.message || 'FORM_LOAD_ERROR', 'danger');
           return of({ status: 'error', result: {} });
         })
       ),
-      this.apiBaseService.get(urlConfig['profileListing'].listingUrl).pipe(
+      this.apiBaseService.get(this.profileListingUrl).pipe(
         catchError((err) => {
-          this.toastService.presentToast(err?.error?.message || 'Error loading profile data', 'danger');
+          this.toastService.presentToast(err?.error?.message || 'PROFILE_LOAD_ERROR', 'danger');
           return of({ status: 'error', result: {} });
         })
       ),
     ])
       .pipe(
         map(([entityConfigRes, profileFormDataRes]: any) => {
-          if (entityConfigRes?.status === 200 && profileFormDataRes?.status === 200) {
+          let profileData = localStorage.getItem("profileData")
+          if(profileData){
+            let parsedData = JSON.parse(profileData)
+            if(parsedData?.state){
+              return parsedData
+            }else{
+              this.presentAlert();
+            }
+          }
+          if (entityConfigRes?.status === 200 && profileFormDataRes?.result) {
             const profileData = entityConfigRes?.result?.meta?.profileKeys;
             const profileDetails = profileFormDataRes?.result;
             if (profileDetails?.state) {
@@ -83,7 +97,7 @@ export class ProfileService {
         result["role"] = data.user_roles.map((role: any) => role.title).join(',');
       } else if (data[key]) {
         if (Array.isArray(data[key])) {
-          result[key] = data[key].map((item: any) => item).join(',');
+          result[key] = data[key].map((item: any) => item.value).join(',');
         } else if (data[key].value) {
           result[key] = data[key].value;
         }
@@ -94,11 +108,11 @@ export class ProfileService {
 
   async presentAlert() {
     this.alertService.presentAlert(
-      'Alert',
-      'Please update your profile to access the feature.',
+      'ALERT',
+      'PROFILE_UPDATE_MSG',
       [
         {
-          text: 'Back',
+          text: 'BACK',
           role: 'cancel',
           cssClass: 'secondary-button',
           handler: () => {
@@ -106,10 +120,11 @@ export class ProfileService {
           }
         },
         {
-          text: 'Update Profile',
+          text: 'PROFILE_UPDATE',
           cssClass: 'primary-button',
           handler: () => {
-            this.router.navigate(['/profile-edit']);
+            // this.router.navigate([this.profilePage]);
+            location.href = environment.profileRedirectPath;
           }
         }
       ]
@@ -118,8 +133,8 @@ export class ProfileService {
 
   async getHomeConfig(listType: any, isReport?: boolean): Promise<any> {
     try {
-      const response: any = await firstValueFrom(this.projectsApiService.post(urlConfig['formListing'].listingUrl, FETCH_HOME_FORM));
-      if (response.status === 200 && response.result) {
+      const response: any = await firstValueFrom(this.projectsApiService.post(this.formListingUrl, FETCH_HOME_FORM));
+      if (response.result) {
         let data = response.result.data;
         let solutionList = data.find((item: any) => item.type === 'solutionList');
         let returnData:any

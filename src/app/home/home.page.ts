@@ -7,11 +7,13 @@ import urlConfig from 'src/app/config/url.config.json';
 import { ToastService } from '../services/toast/toast.service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
-import { FETCH_HOME_FORM } from '../core/constants/formConstant';
+import { FETCH_HOME_FORM, FETCH_HOME_FORM_PROJECT, FETCH_HOME_FORM_SURVEY } from '../core/constants/formConstant';
 import { AuthService } from 'authentication_frontend_library';
 import { UtilService } from 'src/app/services/util/util.service';
 import { ProfileService } from '../services/profile/profile.service';
 import { ProjectsApiService } from '../services/projects-api/projects-api.service';
+import { environment } from 'src/environments/environment';
+import { PAGE_IDS } from '../core/constants/pageIds';
 register();
 @Component({
   selector: 'app-home',
@@ -19,6 +21,9 @@ register();
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
+  showHeader = environment.showHeader;
+  logoPath = environment.config.logoPath;
+  formListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subUser : urlConfig.subSurvey ) + urlConfig['formListing'].listingUrl;
   swiperModules = [IonicSlides];
   jsonData: any;
   baseApiService: any;
@@ -32,7 +37,7 @@ export class HomePage {
   @ViewChild('solutionTemplate') solutionTemplate!: TemplateRef<any>;
   @ViewChild('recommendationTemplate') recommendationTemplate!: TemplateRef<any>;
   clearDatabaseHandler:any;
-
+  pageIdsList = PAGE_IDS
 
   constructor(private http: HttpClient, private router: Router, private utilService: UtilService,
     private profileService: ProfileService
@@ -53,26 +58,24 @@ export class HomePage {
   }
 
   async getHomeListing() {
-    await this.loader.showLoading("Please wait while loading...");
+    await this.loader.showLoading("LOADER_MSG");
     this.baseApiService
       .post(
-        urlConfig['formListing'].listingUrl, FETCH_HOME_FORM)
+        this.formListingUrl, environment.capabilities == 'all' ? FETCH_HOME_FORM :  environment.capabilities == 'survey' ? FETCH_HOME_FORM_SURVEY : FETCH_HOME_FORM_PROJECT)
       .pipe(
         finalize(async () => {
           await this.loader.dismissLoading();
         })
       )
       .subscribe((res: any) => {
-        if (res?.status === 200) {
-          if (res?.result) {
-            this.solutionList = res?.result?.data;
-          }
-          this.typeTemplateMapping = {
-            "bannerList": this.bannerTemplate,
-            "solutionList": this.solutionTemplate,
-            "recomendationList": this.recommendationTemplate
-          };
+        if (res?.result) {
+          this.solutionList = res?.result?.data;
         }
+        this.typeTemplateMapping = {
+          "bannerList": this.bannerTemplate,
+          "solutionList": this.solutionTemplate,
+          "recomendationList": this.recommendationTemplate
+        };
       },
         (err: any) => {
           this.toastService.presentToast(err?.error?.message,"danger");

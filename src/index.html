@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Elevate</title>
 
-<head>
-  <meta charset="utf-8"/>
-  <title>Elevate PWA</title>
+    <base href="/" />
 
-  <base href="/"/>
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <script rel="preload" src="/ml/assets/env/env.js" as="script"></script>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="assets/icons/elevate-logo.svg"
+    />
+    <!-- add to homescreen for ios -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#1976d2" />
+    <!-- Add the following script tag to register the service worker -->
+    <script>
+      if ("serviceWorker" in navigator && location.protocol === "https:") {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("service-worker.js")
+            .then(function (registration) {
+              console.log(
+                "Service Worker registered with scope:",
+                registration.scope
+              );
+            })
+            .catch(function (error) {
+              console.error("Service Worker registration failed:", error);
+            });
+        });
+      }
+    </script>
 
   <meta name="color-scheme" content="light dark"/>
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-  <meta name="format-detection" content="telephone=no"/>     
+  <meta name="format-detection" content="telephone=no"/>
   <meta name="msapplication-tap-highlight" content="no"/>
   <script rel="preload" src="assets/env/env.js" as="script"></script>
-  <link rel="icon" type="image/png" href="assets/icon/favicon.png"/>
-  <link rel="manifest" href="manifest.webmanifest">
-
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
   <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#1976d2"> 
+  <meta name="theme-color" content="#1976d2">
    <!-- Add the following script tag to register the service worker -->
    <script>
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
@@ -42,6 +75,31 @@
 <body>
   <app-root></app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <script>
+    (function() {
+      if (window.env) {
+        if (window.env.config.title) {
+          document.title = window.env.config.title;
+        }
+
+        if (window.env.config.faviconPath) {
+          let link = document.querySelector("link[rel='icon']") || document.createElement("link");
+          link.rel = "icon";
+          link.type = "image/svg+xml";
+          link.href = window.env.config.faviconPath;
+          if (!document.head.contains(link)) {
+            document.head.appendChild(link);
+          }
+        }
+      }
+    })();
+  </script>
 </body>
 
+  <body>
+    <app-root></app-root>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+  </body>
 </html>

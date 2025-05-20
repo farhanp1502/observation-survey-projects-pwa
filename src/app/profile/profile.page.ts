@@ -5,7 +5,8 @@ import { LoaderService } from '../services/loader/loader.service';
 import { catchError, finalize } from 'rxjs';
 import { ToastService } from '../services/toast/toast.service';
 import urlConfig from 'src/app/config/url.config.json';
-import { ProjectsApiService } from '../services/projects-api/projects-api.service';
+import { ApiBaseService } from '../services/base-api/api-base.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -17,12 +18,13 @@ export class ProfilePage {
   enableFormOne: boolean = false;
   enableFormTwo: boolean = false;
   formJson2:any;
+  formListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subUser : urlConfig.subSurvey ) + urlConfig['formListing'].listingUrl;
 
   constructor(private profileService: ProfileService,
     private navCtrl: NavController,
     private loader: LoaderService,
     private toastService: ToastService,
-    private apiBaseService: ProjectsApiService,
+    private apiBaseService: ApiBaseService,
 
   ) { }
 
@@ -33,11 +35,11 @@ export class ProfilePage {
   }
 
   async loadFormAndData() {
-    await this.loader.showLoading("Please wait while loading...");
+    await this.loader.showLoading("LOADER_MSG");
     this.profileService.getFormJsonAndData()
       .pipe(
         catchError((err) => {
-          this.toastService.presentToast(err?.error?.message || 'Error loading profile data. Please try again later.', 'danger');
+          this.toastService.presentToast(err?.error?.message || 'PROFILE_LOAD_ERROR', 'danger');
           throw err;
         }),
         finalize(async () => await this.loader.dismissLoading())
@@ -71,7 +73,7 @@ export class ProfilePage {
     }
     this.formData.roles = formData.user_roles;
     this.mappingAndcheckingLastIndex(formData,this.formJson, 'enableFormOne');
-  
+
   }
 
 
@@ -112,14 +114,14 @@ export class ProfilePage {
       }
 
       if (index === lastIndex) {
+        if(enable == "enableFormTwo"){
+          this.formJson2 = formJson.filter((data:any)=>{ return data.value })
+        }
         this[enable] = true;
       }
     });
   }
 
-  goBack() {
-    this.navCtrl.back();
-  }
 
   capitalizeLabelFirstLetter(label: string): string {
     if (!label) return '';
@@ -131,7 +133,7 @@ export class ProfilePage {
       type: firstLoad? subType?.externalId: subType,
       subType: firstLoad? subType?.externalId : subType
     }
-    this.apiBaseService.post(urlConfig['formListing'].listingUrl, entityForm)
+    this.apiBaseService.post(this.formListingUrl, entityForm)
     .subscribe({
       next:
       (res:any) => {
