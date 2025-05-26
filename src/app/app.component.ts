@@ -19,6 +19,7 @@ export class AppComponent {
       document.documentElement.style.setProperty('--ion-color-primary', theme.primaryColor);
       document.documentElement.style.setProperty('--ion-color-secondary', theme.secondaryColor);
       document.documentElement.style.setProperty('--primary-color', theme.primaryColor);
+      document.documentElement.style.setProperty('--color-secondary', theme.primaryColor);
       document.documentElement.style.setProperty('--color-primary', theme.primaryColor);
     }
     if (this.swUpdate.isEnabled) {
