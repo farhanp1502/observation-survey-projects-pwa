@@ -101,7 +101,7 @@ export class ApiInterceptor implements HttpInterceptor {
       this.utilService.clearDatabase();
       let url = document.baseURI;
       let modifiedUrl = url.replace(/\/ml\/$/, '/');
-      location.href = modifiedUrl;
+      location.href = modifiedUrl + "?unAuth=true";
       return throwError(() => ({
         status: 401,
         error: { message: 'Your session has expired. Please log in again.' },
