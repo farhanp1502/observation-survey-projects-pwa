@@ -92,27 +92,8 @@ export class HomePage {
   }
 
   logout() {
-    // console.log("called the logout function")
-    // // Call this function on logout
-    // this.clearIndexedDB('projectPlayer');
     this.authService.logout();
   }
-
-  // clearIndexedDB(databaseName:string) {
-  //   const deleteRequest = indexedDB.deleteDatabase(databaseName);
-
-  //   deleteRequest.onsuccess = () => {
-  //     console.log(`Database "${databaseName}" deleted successfully.`);
-  //   };
-
-  //   deleteRequest.onerror = (event:any) => {
-  //     console.error(`Error deleting database "${databaseName}":`, event.target.error);
-  //   };
-
-  //   deleteRequest.onblocked = () => {
-  //     console.warn(`Database "${databaseName}" deletion is blocked.`);
-  //   };
-  // }
 
   async handleMessage(event: MessageEvent) {
     if (event.data && event.data.msg) {
