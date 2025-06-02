@@ -41,7 +41,7 @@
             ],
             "scripts": [
               "node_modules/project-player-temp/project-player-component.js",
-              "node_modules/questionnaire-webcomponent/web-component/questionnaire-player-webcomponent.js"
+              "/Users/ramkumar_pacewisdom/questionnaire-player-1/web-component/questionnaire-player-webcomponent.js"
             ],
 
             "serviceWorker": true,
