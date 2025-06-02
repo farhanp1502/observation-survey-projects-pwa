@@ -33,7 +33,7 @@ export class GenericReportComponent implements OnInit {
         this.reportDetails = this.processSurveyData(res.message.report);
       })
     })
-  
+
   }
 
   processSurveyData(data: any[]): any[] {
@@ -42,17 +42,17 @@ export class GenericReportComponent implements OnInit {
         if (typeof answer === 'number') {
           return answer;
         }
-  
-        const trimmedAnswer = answer.trim();
+
+        const trimmedAnswer = answer == null ? '' : answer.trim();
         if (trimmedAnswer === '') {
-          return 'No response is available'; 
+          return 'No response is available';
         }
-  
+
         const option = optionsAvailable?.find((opt: { value: any }) => opt.value === trimmedAnswer);
         return option ? option.label : trimmedAnswer;
       });
     };
-  
+
     const processInstanceQuestions = (instance: any) => {
       const processedInstance = { ...instance };
       for (const key in processedInstance) {
@@ -66,7 +66,7 @@ export class GenericReportComponent implements OnInit {
       }
       return processedInstance;
     };
-  
+
     return data.map((question) => {
       if (question.responseType === 'matrix' && question.instanceQuestions) {
         const processedInstanceQuestions = question.instanceQuestions.map(processInstanceQuestions);
@@ -79,8 +79,8 @@ export class GenericReportComponent implements OnInit {
       }
     });
   }
-  
-  
+
+
 
   openDialog(url: string, type: string) {
     this.objectURL = url;
@@ -112,25 +112,25 @@ export class GenericReportComponent implements OnInit {
 
   applyFilter(reset: boolean = false) {
     this.updateFilteredQuestions();
-  
+
     const questionsToProcess = this.filteredQuestions.length > 0 ? this.filteredQuestions : this.allQuestions;
     this.reportDetails = this.processSurveyData(questionsToProcess);
-  
+
     if (!reset && this.filteredQuestions.length === 0) {
       this.toaster.presentToast('Select at least one question', 'danger');
     }
-  
+
     if (reset || this.filteredQuestions.length > 0) {
       this.closeFilter();
     }
   }
-  
+
   resetFilter() {
     this.allQuestions.forEach(question => question.selected = false);
     this.filteredQuestions = [];
     this.applyFilter(true);
   }
-  
+
 
   openUrl(url:string){
     window.open(url,'_blank')
