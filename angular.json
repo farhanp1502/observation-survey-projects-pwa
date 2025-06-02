@@ -41,7 +41,7 @@
             ],
             "scripts": [
               "node_modules/project-player-temp/project-player-component.js",
-              "node_modules/questionnaire-webcomponent/web-component/questionnaire-player-webcomponent.js"
+              "node_modules/questionnaire-ram-webcomponent/web-component/questionnaire-player-webcomponent.js"
             ],
 
             "serviceWorker": true,
