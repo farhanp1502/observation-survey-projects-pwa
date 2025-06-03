@@ -24,13 +24,13 @@
           <ion-card class="card">
             <ion-card-content>
               <div class="list-card-div">
-                <div class="list-card-head" (click)="navigate(item.keyid)">
+                <div class="list-card-head">
                   <section class="header-inner">
-                    <h1 style="color: var(--ion-color-primary);" >
+                    <h1 style="color: var(--ion-color-primary);"  (click)="navigate(item.keyid)">
                       {{item.data.title}}
                     </h1>
                     <div>
-                      <button class="delete-button" (click)="deletePopup(item.keyid)">
+                      <button class="delete-button">
                         <ion-icon color="primary" size="large" name="trash-outline" (click)="deletePopup(item.keyid)"></ion-icon>
                         <ion-ripple-effect type="unbounded"></ion-ripple-effect>
                       </button>
