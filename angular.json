@@ -44,7 +44,7 @@
               "node_modules/questionnaire-ram-webcomponent/web-component/questionnaire-player-webcomponent.js"
             ],
 
-            "serviceWorker": true,
+            "serviceWorker": false,
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
