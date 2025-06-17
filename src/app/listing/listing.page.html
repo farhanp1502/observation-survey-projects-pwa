@@ -13,7 +13,7 @@
 
     <ion-row class="srch">
       <ion-col size="12">
-        <ion-searchbar class="srchBar" placeholder="Search your {{stateData?.listType}} here" [debounce]="1000"
+        <ion-searchbar class="srchBar" #searchBar placeholder="Search your {{stateData?.listType}} here" [debounce]="1000"
           (ionInput)="handleInput($event)"></ion-searchbar>
       </ion-col>
     </ion-row>
