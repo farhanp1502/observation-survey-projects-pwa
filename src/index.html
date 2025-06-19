@@ -26,21 +26,21 @@
     <meta name="theme-color" content="#1976d2" />
     <!-- Add the following script tag to register the service worker -->
     <script>
-      if ("serviceWorker" in navigator && location.protocol === "https:") {
-        window.addEventListener("load", function () {
-          navigator.serviceWorker
-            .register("service-worker.js")
-            .then(function (registration) {
-              console.log(
-                "Service Worker registered with scope:",
-                registration.scope
-              );
-            })
-            .catch(function (error) {
-              console.error("Service Worker registration failed:", error);
-            });
-        });
-      }
+      // if ("serviceWorker" in navigator && location.protocol === "https:") {
+      //   window.addEventListener("load", function () {
+      //     navigator.serviceWorker
+      //       .register("service-worker.js")
+      //       .then(function (registration) {
+      //         console.log(
+      //           "Service Worker registered with scope:",
+      //           registration.scope
+      //         );
+      //       })
+      //       .catch(function (error) {
+      //         console.error("Service Worker registration failed:", error);
+      //       });
+      //   });
+      // }
     </script>
 
   <meta name="color-scheme" content="light dark"/>
@@ -55,17 +55,17 @@
   <meta name="theme-color" content="#1976d2">
    <!-- Add the following script tag to register the service worker -->
    <script>
-    if ('serviceWorker' in navigator && location.protocol === 'https:') {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(function(registration) {
-            console.log('Service Worker registered with scope:', registration.scope);
-          })
-          .catch(function(error) {
-            console.error('Service Worker registration failed:', error);
-          });
-      });
-    }
+    // if ('serviceWorker' in navigator && location.protocol === 'https:') {
+    //   window.addEventListener('load', function() {
+    //     navigator.serviceWorker.register('service-worker.js')
+    //       .then(function(registration) {
+    //         console.log('Service Worker registered with scope:', registration.scope);
+    //       })
+    //       .catch(function(error) {
+    //         console.error('Service Worker registration failed:', error);
+    //       });
+    //   });
+    // }
   </script>
 
   <link rel="manifest" href="manifest.webmanifest">
