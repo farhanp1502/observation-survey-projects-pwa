@@ -15,7 +15,7 @@ import { CertificateVerificationPopoverComponent } from './shared/certificate-ve
 import { ShareLinkPopupComponent } from './shared/share-link-popup/share-link-popupcomponent';
 import { ShortUrlPipe } from './shared/pipes/short-url.pipe';
 
-import { 
+import {
   TranslateLoader,
   TranslateModule,
   TranslateService,
@@ -44,7 +44,7 @@ export function translateHttpLoaderFactory(httpClient: HttpClient) {
       }
     }),
     ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
+      enabled: false,
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
@@ -80,12 +80,12 @@ export class AppModule {
   }
   setLanguage() {
     this.translate.setDefaultLang('en');
-    this.translate.use('en'); 
+    this.translate.use('en');
   }
 }
 
 export function configFactory(http: HttpClient): any {
-  return http.get("/assets/config/library-config.json").pipe(switchMap((data:any)=>{
+  return http.get("/ml/assets/config/library-config.json").pipe(switchMap((data:any)=>{
     data.baseUrl = environment.baseURL
     return of(data)
   }))

@@ -107,8 +107,8 @@ h2 {
   width: 100%;
   border-radius: 8px;
   border: 1px solid #fff;
-  padding: 2px; 
-  margin: 0 2px; 
+  padding: 2px;
+  margin: 0 2px;
   font-size: 16px;
   font-weight: 400;
   display: flex;
@@ -117,25 +117,25 @@ h2 {
 }
 
 .custom-segment ion-segment-button ion-label {
-  white-space: normal; 
-  overflow: visible; 
-  text-align: center; 
-  display: flex; 
+  white-space: normal;
+  overflow: visible;
+  text-align: center;
+  display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .certificate-tag {
   background-color: #fcd34d;
   color: #000000;
-  font-size: 0.75rem; 
-  border-radius: 0.25rem; 
-  padding: 0.25rem 0.5rem; 
-  text-transform: uppercase; 
-  margin-right: 1rem; 
-  display: inline-flex; 
-  align-items: center; 
-  height: fit-content; 
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  margin-right: 1rem;
+  display: flow;
+  align-items: center;
+  height: fit-content;
 }
 
 @media (max-width: 767px) {
@@ -188,7 +188,7 @@ span {
   font-size: 14px !important;
   color: #000;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem; 
+  margin-bottom: 0.5rem;
 }
 
 .program-items {
@@ -206,24 +206,5 @@ span {
   border-radius: 10px;
   color: #34a853;
   font-size: 12px;
-  padding: 0.3rem 0.5rem; 
-}
-
-ion-fab-button {
-  margin: 15px;
-  padding: 5px;
-  text-transform: none;
-}
-
-ion-button ion-icon {
-  color: var(--ion-color-primary);
-  background: white;
-  border-radius: 50%;
-  padding: 4px;
-  margin-right: 8px;
-}
-
-ion-button{
-  --padding-start: 5px !important;
-  --padding-end: 5px !important;
+  padding: 0.3rem 0.5rem;
 }

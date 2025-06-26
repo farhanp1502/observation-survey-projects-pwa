@@ -78,27 +78,27 @@ export class ProjectReportPage implements OnInit {
     this.listType = 'report';
     this.getReportData();
      this.projectsCategories = [
-      {
-        name: 'Total Projects',
-        img: '/assets/images/report-imgs/Note 1.svg',
-        key: 'total',
-      },
-      {
-        name: 'Projects Submitted',
-        img: '/assets/images/report-imgs/note.svg',
-        key: 'submitted',
-      },
-      {
-        name: 'Projects In Progress',
-        img: '/assets/images/report-imgs/Note 4.svg',
-        key: 'inProgress',
-      },
-      {
-        name: 'Projects Started',
-        img: '/assets/images/report-imgs/Note 3.svg',
-        key: 'started',
-      },
-    ];
+       {
+         name: 'Total Projects',
+         img: '/ml/assets/images/report-imgs/Note 1.svg',
+         key: 'total',
+       },
+       {
+         name: 'Projects Submitted',
+         img: '/ml/assets/images/report-imgs/note.svg',
+         key: 'submitted',
+       },
+       {
+         name: 'Projects In Progress',
+         img: '/ml/assets/images/report-imgs/Note 4.svg',
+         key: 'inProgress',
+       },
+       {
+         name: 'Projects Started',
+         img: '/ml/assets/images/report-imgs/Note 3.svg',
+         key: 'started',
+       },
+     ];
     setTimeout(() => {
       this.renderChart(this.reportData?.tasks, this.reportData?.categories);
     });
@@ -106,14 +106,14 @@ export class ProjectReportPage implements OnInit {
 
   openProgramModal() {
     this.setProgram(true)
-    this.page = 1; 
-    this.programList= [];  
-    this.getPrograms();  
+    this.page = 1;
+    this.programList= [];
+    this.getPrograms();
   }
 
   selectProgram(item: any) {
     this.isProgramModel=false;
-    this.selectedProgram = item.name;  
+    this.selectedProgram = item.name;
     this.programId = item._id;
     this.getReportData()
   }
@@ -123,10 +123,10 @@ export class ProjectReportPage implements OnInit {
       event.target.disabled = true;
       return;
     }
-    this.page += 1;  
+    this.page += 1;
     await this.getPrograms(event);
   }
-  
+
   async getPrograms(event?: any) {
     this.listType='report';
     this.baseApiService

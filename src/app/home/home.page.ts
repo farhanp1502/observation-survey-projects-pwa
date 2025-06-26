@@ -24,7 +24,7 @@ register();
 export class HomePage {
   showHeader = environment.showHeader;
   logoPath = environment.config.logoPath;
-  formListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subProject : urlConfig.subSurvey ) + urlConfig['formListing'].listingUrl;
+  formListingUrl = (environment.capabilities.includes('all') || environment.capabilities.includes('project') ?  urlConfig.subUser : urlConfig.subSurvey ) + urlConfig['formListing'].listingUrl;
   swiperModules = [IonicSlides];
   jsonData: any;
   baseApiService: any;
@@ -71,16 +71,14 @@ export class HomePage {
         })
       )
       .subscribe((res: any) => {
-        if (res?.status === 200) {
-          if (res?.result) {
-            this.solutionList = res?.result?.data;
-          }
-          this.typeTemplateMapping = {
-            "bannerList": this.bannerTemplate,
-            "solutionList": this.solutionTemplate,
-            "recomendationList": this.recommendationTemplate
-          };
+        if (res?.result) {
+          this.solutionList = res?.result?.data;
         }
+        this.typeTemplateMapping = {
+          "bannerList": this.bannerTemplate,
+          "solutionList": this.solutionTemplate,
+          "recomendationList": this.recommendationTemplate
+        };
       },
         (err: any) => {
           this.toastService.presentToast(err?.error?.message,"danger");
@@ -99,6 +97,7 @@ export class HomePage {
   logout() {
     this.authService.logout();
   }
+
   async handleMessage(event: MessageEvent) {
     if (event.data && event.data.msg) {
       this.utilService.clearDatabase();

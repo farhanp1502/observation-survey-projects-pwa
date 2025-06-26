@@ -17,6 +17,15 @@
                 "type": "solutionList",
                 "listingData": [
                     {
+                        "name": "Programs",
+                        "description": "View and participate in educational programs active in your location and designed for the role you selected",
+                        "img": "assets/images/ic_program.svg",
+                        "listType": "program",
+                        "redirectionUrl": "/listing/program",
+                        "solutionType": "isAPrivateProgram",
+                        "reportPage": false
+                    },
+                    {
                         "name": "Projects",
                         "img": "assets/images/ic_project.svg",
                         "redirectionUrl": "/listing/project",
@@ -61,16 +70,6 @@
                                 "description": "Manage and track your school improvement easily, by creating tasks and planning project timelines"
                             },
                             {
-                                "name": "Observation Reports",
-                                "img": "assets/images/ic_observation.svg",
-                                "redirectionUrl": "/observation",
-                                "listType": "listing",
-                                "solutionType": "observation",
-                                "reportPage": true,
-                                "reportIdentifier": "surveyReportPage",
-                                "description": "Provide information and feedback through quick and easy observations"
-                            },
-                            {
                                 "name": "Survey Reports",
                                 "img": "assets/images/ic_survey.svg",
                                 "redirectionUrl": "/listing/survey",
@@ -79,6 +78,16 @@
                                 "reportPage": true,
                                 "reportIdentifier": "surveyReportPage",
                                 "description": "Provide information and feedback through quick and easy surveys"
+                            },
+                            {
+                                "name": "Observation Reports",
+                                "img": "assets/images/ic_observation.svg",
+                                "redirectionUrl": "/observation",
+                                "listType": "listing",
+                                "solutionType": "observation",
+                                "reportPage": true,
+                                "reportIdentifier": "surveyReportPage",
+                                "description": "Provide information and feedback through quick and easy observations"
                             }
                         ]
                     },
