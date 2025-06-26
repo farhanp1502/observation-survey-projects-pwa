@@ -4,7 +4,7 @@ import urlConfig from 'src/app/config/url.config.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../services/loader/loader.service';
 import { ToastService } from '../services/toast/toast.service';
-import { IonSearchbar, NavController } from '@ionic/angular';
+import { IonSearchbar, ModalController, NavController } from '@ionic/angular';
 import { finalize } from 'rxjs';
 import { actions } from 'src/app/config/actionContants';
 import { ProfileService } from '../services/profile/profile.service';
