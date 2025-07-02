@@ -7,7 +7,7 @@ import { PAGE_IDS } from './core/constants/pageIds';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 const routes: Routes = [
   {
-    path: 'home-page',
+    path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomePageModule),
     canActivate: [AuthGuard, allowPageAccessGuard],
     data: { pageId: PAGE_IDS.home }
