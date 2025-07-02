@@ -1,5 +1,5 @@
 export const PAGE_IDS = {
-    home: "HOME",
+    home: "HOME_PAGE",
     reportsList: "REPORTS_LIST",
     reportDetails: "REPORT_DETAILS",
     questioniare: "QUESTIONIARE",
