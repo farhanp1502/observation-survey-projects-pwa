@@ -19,7 +19,6 @@ export const allowPageAccessGuard: CanActivateFn = (
   | UrlTree => {
   const router = inject(Router);
   if (environment.restrictedPages.includes(route.data['pageId'])) {
-    debugger;
     localStorage.clear();
     let url = document.baseURI;
     let modifiedUrl = url.replace(/\/ml\/$/, '/');
