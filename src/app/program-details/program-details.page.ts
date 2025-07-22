@@ -124,7 +124,7 @@ export class ProgramDetailsPage implements OnInit {
         break;
 
       case 'observation':
-        window.location.href = `/observations/entityList/${data._id}/${data.name}/${data.entityType}/${data._id}`;
+        window.location.href = `/ml/observation?type=entityList&id=${data._id}&name=${data.name}&entityType=${data.entityType}`;
         break;
 
       default:
@@ -187,7 +187,7 @@ export class ProgramDetailsPage implements OnInit {
               queryParams.set('solutionId', data._id);
             }
             queryParams.set('index', '0');
-            window.location.href = `/observations/questionnaire?${queryParams.toString()}`;          }
+            window.location.href = `/ml/questionnaire?${queryParams.toString()}`;          }
         } else {
           this.toastService.presentToast(res?.message, 'danger');
         }
