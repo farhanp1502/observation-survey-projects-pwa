@@ -1,4 +1,4 @@
-import {  Component, OnInit, inject } from '@angular/core';
+import {  Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController, PopoverController } from '@ionic/angular';
 import { ProfileService } from '../services/profile/profile.service';
@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './project-details.page.html',
   styleUrls: ['./project-details.page.scss'],
 })
-export class ProjectDetailsPage implements OnInit {
+export class ProjectDetailsPage implements OnInit,OnDestroy {
   showHeader = environment.showHeader;
   router: Router;
   projectData: any;
@@ -26,9 +26,11 @@ export class ProjectDetailsPage implements OnInit {
     accessToken: localStorage.getItem('accToken'),
     profileInfo: {},
     redirectionLinks: {
-      contentPolicyLink: environment.contentPolicyURL,
-      profilePage: environment.profileRedirectPath ?? '',
+      contentPolicyLink: "https://shikshalokam.org/mentoring/privacy-policy/",
+      profilePage: environment.profileRedirectPath ?? "",
+      unauthorizedRedirectUrl: environment.unauthorizedRedirectUrl ?? ""
     },
+    language: "en"
   };
   showDetails = false;
   sharePopupHandler: any;
@@ -41,6 +43,7 @@ export class ProjectDetailsPage implements OnInit {
     private network: NetworkServiceService
   ) {
     this.router = inject(Router);
+    this.config.language = this.utils.getPreferredLanguage()
     this.network.isOnline$.subscribe((status: any) => {
       this.isOnline = status;
     });
@@ -102,11 +105,10 @@ export class ProjectDetailsPage implements OnInit {
       this.showDetails = true;
       return;
     }
-    this.profileService
-      .getProfileAndEntityConfigData()
-      .subscribe((mappedIds) => {
-        if (mappedIds) {
-          this.config.profileInfo = mappedIds;
+    this.profileService.getProfileAndEntityConfigData().subscribe(async (mappedIds) => {
+        let data = await mappedIds
+        if (data) {
+          this.config.profileInfo = data;
         } else {
           history.replaceState(null, '', '/');
           this.navCtrl.back();
