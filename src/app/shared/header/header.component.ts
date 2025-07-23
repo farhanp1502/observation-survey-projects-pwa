@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -10,10 +10,10 @@ import { environment } from 'src/environments/environment';
 export class HeaderComponent   {
   showHeader = environment.showHeader;
   @Input() pageTitle?: string ;
-  constructor(private navCtrl: NavController) { }
+  constructor(private location: Location) { }
 
   goBack() {
-    this.navCtrl.back();
+    this.location.back();
   }
 
 }

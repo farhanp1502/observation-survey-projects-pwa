@@ -4,13 +4,14 @@ import urlConfig from 'src/app/config/url.config.json';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../services/loader/loader.service';
 import { ToastService } from '../services/toast/toast.service';
-import { IonSearchbar, NavController } from '@ionic/angular';
+import { IonSearchbar, ModalController, NavController } from '@ionic/angular';
 import { finalize } from 'rxjs';
 import { actions } from 'src/app/config/actionContants';
 import { ProfileService } from '../services/profile/profile.service';
 import { AlertService } from '../services/alert/alert.service';
 import { ProjectsApiService } from '../services/projects-api/projects-api.service';
 import { SamikshaApiService } from '../services/samiksha-api/samiksha-api.service';
+import { PrivacyPolicyPopupComponent } from '../shared/privacy-policy-popup/privacy-policy-popup.component';
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.page.html',
@@ -38,7 +39,7 @@ export class ListingPage implements OnInit {
 
   constructor(private navCtrl: NavController, private router: Router,
     private profileService: ProfileService,
-    private alertService: AlertService, private activatedRoute: ActivatedRoute
+    private alertService: AlertService, private activatedRoute: ActivatedRoute, private modalCtrl: ModalController
   ) {
     this.ProjectsApiService = inject(ProjectsApiService);
     this.SamikshaApiService = inject(SamikshaApiService);
@@ -92,15 +93,16 @@ export class ListingPage implements OnInit {
   }
 
   getProfileDetails() {
-    this.profileService.getProfileAndEntityConfigData().subscribe((mappedIds) => {
-      if (mappedIds) {
-        this.entityData = mappedIds;
+    this.profileService.getProfileAndEntityConfigData().subscribe(async(mappedIds) => {
+      let data = await mappedIds
+      if (data) {
+      this.entityData= data;
         this.getListData();
       }
     });
   }
 
-  async getListData() {
+  async getListData($event?:any) {
     this.showLoading = true;
     await this.loader.showLoading("LOADER_MSG");
     if(this.listType !== 'project'){
@@ -127,6 +129,9 @@ export class ListingPage implements OnInit {
           });
         } else {
           this.toastService.presentToast(res?.message, 'warning');
+        }
+        if($event){
+          $event.target.complete();
         }
       },
         (err: any) => {
@@ -193,9 +198,9 @@ export class ListingPage implements OnInit {
 
 
 
-  loadData() {
+  loadData($event: any) {
     this.page = this.page + 1;
-    this.getListData();
+    this.getListData($event);
   }
 
 
@@ -222,4 +227,36 @@ export class ListingPage implements OnInit {
     }
   }
 
+ async  createNewProject(){
+    let tAndC = await this.openPrivacyPolicyPopup();
+      this.router.navigate(['project-details'],{ queryParams: {type: "projectCreate" ,option:"create",hasAcceptedTAndC:tAndC} });
+  }
+  async openPrivacyPolicyPopup():Promise<boolean> {
+    const modal = await this.modalCtrl.create({
+      component: PrivacyPolicyPopupComponent,
+      componentProps: {
+        popupData: {
+          title: 'SHARE_PROJECT_DETAILS',
+          message1: 'PRIVACY_POLICY_MSG1',
+          message2: 'PRIVACY_POLICY_LINK_MSG',
+          message3: 'PRIVACY_POLICY_MSG2',
+          button1: 'DO_NOT_SHARE',
+          button2: 'SHARE'
+        },
+        contentPolicyLink: 'https://diksha.gov.in/term-of-use.html'
+      },
+      cssClass: 'popup-class2',
+      backdropDismiss: false
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onDidDismiss();
+    if (data?.buttonAction) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
+

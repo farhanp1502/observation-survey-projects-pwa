@@ -116,7 +116,7 @@ export class ApiInterceptor implements HttpInterceptor {
   }
 
   async getToken(): Promise<string | null> {
-    let token = localStorage.getItem('accToken');
+    let token = localStorage.getItem('accToken') ?? null;
     if (!token) {
       return null;
     }
