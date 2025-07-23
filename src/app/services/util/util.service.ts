@@ -49,9 +49,13 @@ export class UtilService {
   }
 
   navigateTo(data: any) {
-    !data.customNavigation ?
-    this.router.navigate([data?.redirectionUrl], { queryParams: { type: data.listType, reportPage: data?.reportPage } }) :
-    window.location.href = data.redirectionUrl  }
+    if(!data.customNavigation){
+      this.router.navigate([data?.redirectionUrl], { queryParams: { type: data.listType, reportPage: data?.reportPage } })
+    }
+    else {
+      window.location.href = data.redirectionUrl
+    }
+  }
 
     getPreferredLanguage(){
       let preferredLanguage = localStorage.getItem("preferredLanguage")
