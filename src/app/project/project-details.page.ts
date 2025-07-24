@@ -30,11 +30,11 @@ export class ProjectDetailsPage implements OnInit,OnDestroy {
       profilePage: environment.profileRedirectPath ?? "",
       unauthorizedRedirectUrl: environment.unauthorizedRedirectUrl ?? ""
     },
-    language: "en"
+    language: "en",
+    hasProfileEdit: false
   };
   showDetails = false;
   sharePopupHandler: any;
-  hasProfileEdit:boolean = false;
   constructor(
     private navCtrl: NavController,
     private profileService: ProfileService,
