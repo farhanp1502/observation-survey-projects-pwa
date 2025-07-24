@@ -34,6 +34,7 @@ export class ProjectDetailsPage implements OnInit,OnDestroy {
   };
   showDetails = false;
   sharePopupHandler: any;
+  hasProfileEdit:boolean = false;
   constructor(
     private navCtrl: NavController,
     private profileService: ProfileService,
