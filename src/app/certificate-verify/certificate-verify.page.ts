@@ -19,7 +19,7 @@ export class CertificateVerifyPage implements OnInit {
   userName:any;
   projectName:any;
   endDate:any;
-  certificateFound: boolean | null = null;
+  certificateFound = false;
 
   constructor( private activatedRoute: ActivatedRoute) { 
     this.baseApiService = inject(ProjectsApiService);
