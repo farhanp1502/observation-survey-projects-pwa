@@ -1,27 +1,78 @@
 <app-header></app-header>
 
 <div class="contain" fullscreen>
-  <div class="card">
-    <div class="card-header">
-      <ion-icon name="checkmark-circle-outline" class="success-icon"></ion-icon>
-      <div class="title">{{ "CERTIFICATE_VERIFIED" | translate }}</div>
-    </div>
+  <div class="certificate-page">
 
-    <div class="icon-wrapper">
-      <img class="icon" src="assets/icons/badge.svg" alt="Certificate Icon">
-    </div>
+    <div class="certificate-container" *ngIf="certificateFound === true">
+      <div class="success-badge">
+        <div class="checkmark-circle">
+          <svg class="checkmark-svg" viewBox="0 0 52 52">
+            <circle class="checkmark-circle-path" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+      </div>
 
-    <div class="certificate-details">
-      <div class="issued-to">{{ "CERTIFICATE_ISSUED" | translate }}</div>
-      <div class="recipient">{{ userName }}</div>
-      <div class="message">{{ "CERTIFICATE_SUCCESS" | translate }}</div>
-      <div class="project">{{ projectName }}</div>
-      <div class="date">
-        {{ "CERTIFICATE_COMPLETION_DATE" | translate: { completedDate: (endDate | date: 'dd/MM/yyyy') } }}
+      <div class="certificate-header">
+        <h1 class="verified-title">{{ "CERTIFICATE_VERIFIED" | translate }}</h1>
+        <div class="header-underline"></div>
+      </div>
+
+      <div class="badge-wrapper">
+        <div class="animated_badge">
+          <div class="animated_stars">
+            <div class="animated_star plus"></div>
+            <div class="animated_star donut yellow"></div>
+            <div class="animated_star plus"></div>
+            <div class="animated_star donut"></div>
+            <div class="animated_star plus yellow"></div>
+          </div>
+          <img class="icon" src="assets/icons/badge.svg" alt="Certificate Icon">
+        </div>
+      </div>
+
+      <div class="completion-header">
+        <span class="grad-emoji">🎓</span>
+        <h2 class="completion-title">{{"CERTIFICATE_OF_COMPLETION"|translate}}</h2>
+        <span class="grad-emoji">🎓</span>
+      </div>
+
+      <div class="certificate-content">
+        <div class="presentation-section">
+          <p class="proudly-text">{{"THIS_IS_PROUDLY_PRESENTED_TO"|translate}}</p>
+          <h2 class="recipient-name">✨ {{ userName }} ✨</h2>
+        </div>
+
+        <div class="achievement-section">
+          <p class="achievement-text">{{"FOR_SUCCESSFULLY_COMPLETING_THE_PROJECT" | translate}}</p>
+          <h3 class="project-name">"{{ projectName }}"</h3>
+        </div>
+
+        <div class="date-section">
+          <p class="completion-date-text">
+            {{"ON" |translate}} {{ endDate | date: 'dd MMMM yyyy' }}.
+          </p>
+        </div>
       </div>
     </div>
+
+    <div class="certificate-container not-found" *ngIf="certificateFound === false">
+      <div class="error-badge">
+        <div class="error-circle">
+          <svg class="error-svg" viewBox="0 0 52 52">
+            <circle class="error-circle-path" cx="26" cy="26" r="25" fill="none"/>
+            <line class="error-line" x1="18" y1="18" x2="34" y2="34"/>
+            <line class="error-line" x1="34" y1="18" x2="18" y2="34"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="error-content">
+        <h1 class="error-title">{{"CERTIFICATE_NOT_FOUND" | translate}}</h1>
+        <p class="error-message">{{"CERTIFICATE_NOT_FOUND_DESCRIPTION" | translate}}</p>
+        <div class="error-icon-large">🔍</div>
+      </div>
+    </div>
+
   </div>
 </div>
-
-
-

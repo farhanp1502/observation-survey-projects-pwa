@@ -1,76 +1,658 @@
+.completion-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}.contain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.certificate-page {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+}
+
+.certificate-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.07),
+    0 10px 20px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.success-badge {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.checkmark-circle {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  display: inline-block;
+  background: #10b981;
+  border-radius: 50%;
+  animation: circle-fill 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkmark-svg {
+  width: 70%;
+  height: 70%;
+}
+
+.checkmark-circle-path {
+  stroke: #10b981;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+  stroke: white;
+  stroke-width: 4;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+
+@keyframes circle-fill {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes stroke-check {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.certificate-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.verified-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.header-underline {
+  width: 80px;
+  height: 3px;
+  background: var(--ion-color-primary);
+  margin: 0 auto;
+}
+
+.badge-wrapper {
+  text-align: center;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.animated_badge {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 140px;
+  background-color: #fff;
+  border-radius: 100px;
+  box-shadow: 0px 2px 4px rgba(25, 35, 49, 0.02), 0px 24px 32px rgba(25, 35, 49, 0.08), 0px 4px 40px rgba(0, 0, 0, 0.12);
+  animation: fade-in-top 1.5s ease forwards;
+  will-change: transform, opacity;
+  opacity: 0;
+}
+
+.animated_badge::before {
+  content: '';
+  position: absolute;
+  left: 17px;
+  top: 17px;
+  width: 106px;
+  height: 106px;
+  background-color: #f1f1eb;
+  border-radius: 100px;
+  opacity: 0;
+  animation: fade-in 1.5s ease forwards;
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+.animated_badge .icon {
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+}
+
+.animated_stars {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.animated_stars .animated_star {
+  position: absolute;
+  opacity: 0;
+  animation: star-animation 0.6s 1s ease forwards;
+  will-change: transform, opacity;
+}
+
+.animated_stars .animated_star:nth-of-type(1) {
+  left: -6px;
+  top: 23px;
+  animation-delay: 1s;
+}
+
+.animated_stars .animated_star:nth-of-type(2) {
+  left: 28px;
+  top: 12px;
+  animation-delay: 1.05s;
+}
+
+.animated_stars .animated_star:nth-of-type(3) {
+  left: 68px;
+  top: -10px;
+  animation-delay: 1.1s;
+}
+
+.animated_stars .animated_star:nth-of-type(4) {
+  left: 108px;
+  top: 8px;
+  animation-delay: 1.15s;
+}
+
+.animated_stars .animated_star:nth-of-type(5) {
+  left: 136px;
+  top: 30px;
+  animation-delay: 1.2s;
+}
+
+.animated_stars .animated_star.plus {
+  width: 12px;
+  height: 12px;
+}
+
+.animated_stars .animated_star.plus::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 12px;
+  height: 4px;
+  background-color: #d5d4d1;
+  border-radius: 10px;
+}
+
+.animated_stars .animated_star.plus::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 4px;
+  height: 12px;
+  background-color: #d5d4d1;
+  border-radius: 10px;
+}
+
+.animated_stars .animated_star.plus.yellow::before,
+.animated_stars .animated_star.plus.yellow::after {
+  background-color: #fcd977;
+}
+
+.animated_stars .animated_star.donut {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border: 3px solid #d5d4d1;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.animated_stars .animated_star.donut.yellow {
+  border-color: #fcd977;
+}
+
+@keyframes star-animation {
+  0% {
+    opacity: 1;
+    transform: scale(0.2);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-in-top {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.completion-header {
+  text-align: center;
+  margin-bottom: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+
+.grad-emoji {
+  font-size: 24px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.completion-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  margin: 0;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.certificate-content {
+  max-width: 650px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.presentation-section {
+  margin-bottom: 25px;
+}
+
+.proudly-text {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.recipient-name {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  margin: 0;
+  line-height: 1.2;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.achievement-section {
+  margin-bottom: 20px;
+}
+
+.achievement-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.project-name {
+  font-size: 19px;
+  font-weight: 600;
+  color: #999;
+  margin: 0;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+
+
+
+.date-section {
+  margin-top: 15px;
+}
+
+.completion-date-text {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
   .contain {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    padding: 0;
   }
-  
-  .card {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem 1.5rem;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    text-align: center;
+
+  .certificate-page {
+    padding: 0;
   }
-  
-  .card-header {
+
+  .certificate-container {
+    padding: 40px 25px;
+    border-radius: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  
-  .success-icon {
-    font-size: 3rem;
-    color: #4caf50;
-    margin-bottom: 0.5rem;
-  }
-  
-  .title {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .icon-wrapper {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 1.5rem 0;
   }
-  
-  .icon {
+
+  .verified-title {
+    font-size: 20px;
+  }
+
+  .checkmark-circle {
+    width: 55px;
+    height: 55px;
+  }
+
+  .animated_badge {
     width: 120px;
     height: 120px;
   }
-  
-  .certificate-details {
+
+  .animated_badge::before {
+    left: 15px;
+    top: 15px;
+    width: 90px;
+    height: 90px;
+  }
+
+
+  .completion-title {
+    font-size: 16px;
+    letter-spacing: 0.3px;
+  }
+
+  .grad-icon,
+  .grad-emoji {
+    font-size: 18px;
+  }
+
+  .recipient-name {
+    font-size: 28px;
+  }
+
+  .project-name {
+    font-size: 16px;
+  }
+
+  .achievement-text,
+  .platform-text,
+  .completion-date-text,
+  .proudly-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .certificate-container {
+    padding: 30px 20px;
+  }
+
+  .verified-title {
+    font-size: 18px;
+  }
+
+  .checkmark-circle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .animated_badge {
+    width: 110px;
+    height: 110px;
+  }
+
+  .animated_badge::before {
+    left: 14px;
+    top: 14px;
+    width: 82px;
+    height: 82px;
+  }
+
+
+  .animated_stars .animated_star:nth-of-type(1) {
+    left: -5px;
+    top: 18px;
+  }
+
+  .animated_stars .animated_star:nth-of-type(2) {
+    left: 22px;
+    top: 10px;
+  }
+
+  .animated_stars .animated_star:nth-of-type(3) {
+    left: 55px;
+    top: -8px;
+  }
+
+  .animated_stars .animated_star:nth-of-type(4) {
+    left: 88px;
+    top: 5px;
+  }
+
+  .animated_stars .animated_star:nth-of-type(5) {
+    left: 110px;
+    top: 22px;
+  }
+
+  .completion-header {
+    gap: 8px;
+  }
+
+  .completion-title {
+    font-size: 14px;
+  }
+
+  .grad-icon,
+  .grad-emoji {
+    font-size: 16px;
+  }
+
+  .recipient-name {
+    font-size: 24px;
+  }
+
+  .project-name {
+    font-size: 14px;
+  }
+
+  .achievement-text,
+  .platform-text,
+  .completion-date-text,
+  .proudly-text {
+    font-size: 13px;
+  }
+}
+
+
+.certificate-container.not-found {
+  padding: 60px 40px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.certificate-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.certificate-container.not-found {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.error-badge {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.error-circle {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fee2e2;
+  border-radius: 50%;
+  animation: error-pop 0.4s ease-out forwards;
+}
+
+.error-svg {
+  width: 70%;
+  height: 70%;
+}
+
+.error-circle-path {
+  stroke: #ef4444;
+  stroke-width: 2;
+  fill: none;
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  animation: error-stroke 0.5s ease-out forwards;
+}
+
+.error-line {
+  stroke: #ef4444;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-dasharray: 32;
+  stroke-dashoffset: 32;
+  animation: error-line-draw 0.4s ease-out 0.3s forwards;
+}
+
+.error-content {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.error-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 10px 0 12px;
+  color: #b91c1c;
+}
+
+.error-message {
+  font-size: 15px;
+  margin: 0 0 20px;
+  line-height: 1.6;
+  color: #4b5563;
+}
+
+.error-icon-large {
+  font-size: 42px;
+  margin-top: 8px;
+  animation: float-icon 1.6s ease-in-out infinite;
+}
+
+/* Animations for error card */
+
+@keyframes error-pop {
+  0% { transform: scale(0.4); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes error-stroke {
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes error-line-draw {
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes float-icon {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+/* Responsive adjustments for error card */
+
+@media (max-width: 768px) {
+  .certificate-container.not-found {
+    padding: 40px 25px;
+    border-radius: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    margin-bottom: 1rem;
+    justify-content: center;
   }
-  
-  .issued-to {
-    color: #007bff;
-    font-size: 1rem;
+
+  .error-title { font-size: 20px; }
+  .error-message { font-size: 14px; }
+  .error-circle { width: 52px; height: 52px; }
+  .error-icon-large { font-size: 34px; }
+}
+
+@media (max-width: 480px) {
+  .certificate-container.not-found {
+    padding: 30px 20px;
   }
-  
-  .recipient,
-  .project {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #222;
-  }
-  
-  .message {
-    font-size: 1rem;
-    color: #444;
-  }
-  
-  .date {
-    font-size: 0.9rem;
-    color: #666;
-  }
-  
+
+  .error-title { font-size: 18px; }
+  .error-message { font-size: 13px; }
+  .error-circle { width: 48px; height: 48px; }
+  .error-icon-large { font-size: 30px; }
+}
+

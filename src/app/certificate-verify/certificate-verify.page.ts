@@ -19,6 +19,7 @@ export class CertificateVerifyPage implements OnInit {
   userName:any;
   projectName:any;
   endDate:any;
+  certificateFound: boolean | null = null;
 
   constructor( private activatedRoute: ActivatedRoute) { 
     this.baseApiService = inject(ProjectsApiService);
@@ -42,14 +43,17 @@ export class CertificateVerifyPage implements OnInit {
         .subscribe(
           async (res: any) => {
             if (res.result) {
-              this.userName = res.result?.userName;
-              this.projectName = res.result?.projectName;
+              this.certificateFound = true;
+              this.userName = res?.result?.userName;
+              this.projectName = res?.result?.projectName;
               this.endDate=res?.result?.completedDate
             } else {
+              this.certificateFound = false;
               this.toastService.presentToast('SOMETHING_WENT_WRONG', 'danger');
             }
           },
           (err: any) => {
+            this.certificateFound = false;
             this.toastService.presentToast(err?.error?.message, 'danger');
           }
         );

@@ -107,5 +107,11 @@
     "CERTIFICATE_VERIFY": "प्रमाणपत्र सत्यापन",
     "PROGRAM_LIST": "कार्यक्रम सूची",
     "PROJECT_LIST": "प्रोजेक्ट सूची",
-    "LISTING": "सूचीबद्ध करना"
+    "LISTING": "सूचीबद्ध करना",
+    "ON": "दिनांक",
+    "CERTIFICATE_NOT_FOUND": "प्रमाणपत्र नहीं मिला",
+    "CERTIFICATE_NOT_FOUND_DESCRIPTION": "हम इस आईडी के साथ प्रमाणपत्र नहीं ढूंढ सके। कृपया लिंक की जाँच करें और पुनः प्रयास करें।",
+    "FOR_SUCCESSFULLY_COMPLETING_THE_PROJECT": "प्रोजेक्ट को सफलतापूर्वक पूरा करने पर",
+    "THIS_IS_PROUDLY_PRESENTED_TO": "यह गर्वपूर्वक प्रस्तुत किया जाता है",
+    "CERTIFICATE_OF_COMPLETION": "समापन प्रमाणपत्र"
   }
