@@ -43,7 +43,7 @@ export class CertificateVerifyPage implements OnInit {
         .subscribe(
           async (res: any) => {
             if (res.result) {
-              this.certificateFound = true ;
+              this.certificateFound = true;
               this.userName = res?.result?.userName;
               this.projectName = res?.result?.projectName;
               this.endDate=res?.result?.completedDate
