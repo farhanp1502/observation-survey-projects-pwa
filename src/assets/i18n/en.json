@@ -107,5 +107,11 @@
   "CERTIFICATE_VERIFY": "Certificate Verify",
   "PROGRAM_LIST": "Program Listing",
   "PROJECT_LIST": "Project Listing",
-  "LISTING": "Listing"
+  "LISTING": "Listing",
+  "ON": "on",
+  "CERTIFICATE_NOT_FOUND": "Certificate Not Found",
+  "CERTIFICATE_NOT_FOUND_DESCRIPTION": "We couldn't find a certificate with this ID. Please check the link and try again.",
+  "FOR_SUCCESSFULLY_COMPLETING_THE_PROJECT": "for successfully completing the project",
+  "THIS_IS_PROUDLY_PRESENTED_TO": "This is proudly presented to",
+  "CERTIFICATE_OF_COMPLETION": "Certificate of Completion"
 }
