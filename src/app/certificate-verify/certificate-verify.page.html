@@ -3,7 +3,7 @@
 <div class="contain" fullscreen>
   <div class="certificate-page">
 
-    @if (certificateFound) {
+    @if (certificateFound === true) {
       <div class="certificate-container" >
         <div class="success-badge">
           <div class="checkmark-circle">
@@ -57,7 +57,7 @@
         </div>
       </div>
     }
-    @else {
+    @else if(certificateFound === false) {
       <div class="certificate-container not-found" >
         <div class="error-badge">
           <div class="error-circle">
