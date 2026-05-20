@@ -105,6 +105,9 @@
         export NVM_DIR="$HOME/.nvm"
         . "$NVM_DIR/nvm.sh"
         cd {{project_path}}
+        which node
+        which npm
+        which ionic
         npx ionic build --prod > build.log 2>&1
       args:
         executable: /bin/bash 
