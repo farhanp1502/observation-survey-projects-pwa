@@ -105,15 +105,6 @@
         export NVM_DIR="$HOME/.nvm"
         . "$NVM_DIR/nvm.sh"
         cd {{project_path}}
-        cd {{project_path}}
-
-        echo "Node Path: $(which node)"
-        echo "NPM Path: $(which npm)"
-        echo "Ionic Path: $(which ionic)"
-
-        node -v
-        npm -v
-        ionic version
 
         ionic build --prod 2>&1 | tee build.log
       args:
