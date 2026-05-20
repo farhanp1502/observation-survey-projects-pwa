@@ -105,7 +105,7 @@
         export NVM_DIR="$HOME/.nvm"
         . "$NVM_DIR/nvm.sh"
         cd {{project_path}}
-        ionic build --prod 2>&1
+        ionic build --prod 
       args:
         executable: /bin/bash
     - name: Start pm2
